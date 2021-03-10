@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Wayo_API.Models;
@@ -51,6 +52,20 @@ namespace Wayo_API.Controllers
             testPosition.RemainningDuration = update.RemainningDuration;
 
             return Ok(testPosition);
+        }
+
+        [HttpPost("/newPage/{codePage}")]
+        public ActionResult<string> CreateNewPage(string codePage)
+        {
+            string source = "TEST STRONY " + codePage;
+
+            string pathToNewFolder = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\", codePage);
+            DirectoryInfo directory = Directory.CreateDirectory(pathToNewFolder);
+
+            string filePath = Path.Combine(pathToNewFolder, "index.html");
+            System.IO.File.WriteAllText(filePath, source);
+
+            return Ok(filePath);
         }
     }
 }
