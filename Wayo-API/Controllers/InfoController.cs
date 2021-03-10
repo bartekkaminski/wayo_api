@@ -59,10 +59,10 @@ namespace Wayo_API.Controllers
         {
             string source = "TEST STRONY " + codePage;
 
-            string pathToNewFolder = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\", codePage);
+            string pathToNewFolder = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", codePage);
             DirectoryInfo directory = Directory.CreateDirectory(pathToNewFolder);
 
-            string filePath = Path.Combine(directory.FullName, "index.html");
+            string filePath =  Path.Combine(directory.FullName, "index.html");
             System.IO.File.WriteAllText(filePath, source);
 
             return Ok(filePath);
