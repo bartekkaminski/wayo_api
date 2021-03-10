@@ -52,6 +52,7 @@ namespace Wayo_API
 
             app.UseHttpsRedirection();
 
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseRouting();
