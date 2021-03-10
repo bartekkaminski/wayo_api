@@ -54,10 +54,15 @@ namespace Wayo_API.Controllers
             return Ok(testPosition);
         }
 
-        [HttpPost("/newPage/{codePage}")]
-        public ActionResult<string> CreateNewPage(string codePage)
+        // DO ZMIANY NA POST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! (do testów w przeglądarce)
+        [HttpGet("/newPage/{codePage}/{lon}&{lat}")]
+        public ActionResult<string> CreateNewPage(string codePage, double lon, double lat)
         {
-            string source = "TEST STRONY " + codePage;
+            string pathToTemplate = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", "template.html");
+
+            string source = System.IO.File.ReadAllText(pathToTemplate);
+
+            source = source.Replace("{{centerCamera}}", "[" + lon + "," + lat + "]");
 
             string pathToNewFolder = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", codePage);
             DirectoryInfo directory = Directory.CreateDirectory(pathToNewFolder);
