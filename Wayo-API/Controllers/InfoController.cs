@@ -62,7 +62,7 @@ namespace Wayo_API.Controllers
             string pathToNewFolder = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\", codePage);
             DirectoryInfo directory = Directory.CreateDirectory(pathToNewFolder);
 
-            string filePath = Path.Combine(pathToNewFolder, "index.html");
+            string filePath = Path.Combine(directory.FullName, "index.html");
             System.IO.File.WriteAllText(filePath, source);
 
             return Ok(filePath);
